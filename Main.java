@@ -1,59 +1,95 @@
 
+class BST {
+    public Node root;
+
+    BST(int val) {
+        root = new Node(val);
+    }
+
+    public void insertNode(int val) {
+        root.insertNode(val);
+    }
+
+    public boolean find(int val) {
+        if (root == null) {
+            return false;
+        } else {
+            return root.find(val);
+        }
+    }
+
+    public void preorderTraversal(){
+        root.preorderTraversal(root);
+    }
+}
+
 class Node {
-    int mVal;
+    private int mVal;
     Node left;
     Node right;
+
+    public int getVal() {
+        return mVal;
+    }
 
     Node(int val) {
         mVal = val;
     }
 
-    public void insert(int val) {
-        if (this == null) {
-            this.mVal = val;
-        } else {
-            if (val < this.mVal) {
-                if (this.left == null) {
-                    this.left = new Node(val);
-                } else {
-                    this.left.insert(val);
-                }
-            } else if (val > this.mVal) {
-                if (this.right == null) {
-                    this.right = new Node(val);
-                } else {
-                    this.right.insert(val);
-                }
+    public void insertNode(int val) {
+
+        if (val < this.getVal()) {
+            if (this.left == null) {
+                this.left = new Node(val);
+            } else {
+                this.left.insertNode(val);
+            }
+        } else if (val > this.getVal()) {
+            if (this.right == null) {
+                this.right = new Node(val);
+            } else {
+                this.right.insertNode(val);
             }
         }
     }
-}
 
-class BST {
-    public Node root;
-
-    BST(int val) {
-        Node rootNode = new Node(val);
-        root = rootNode;
+    public boolean find(int val) {
+        boolean found = false;
+        if (this == null) {
+            return false;
+        } else {
+            if (val == this.getVal()) {
+                return true;
+            } else if (val < this.left.getVal() && this.left != null) {
+                found = this.left.find(val);
+            } else if (val > this.right.getVal() && this.right != null) {
+                found = this.right.find(val);
+            }
+        }
+        return found;
     }
 
+    public void preorderTraversal(Node node) {
+        if (node == null) return;
+        System.out.println(node.getVal() + " ");
+        preorderTraversal(node.left);
+        preorderTraversal(node.right);
+    }
 }
 
 public class Main {
 
-    public static void main(String[] args) {
-        BST bst = new BST(10);
+    public static void main(String args[]) {
+        BST bst = new BST(25);
+        int[] nodes = new int[]{15, 10, 4, 12, 22, 18, 24, 50, 35, 31, 44, 70, 66, 90};
 
-        bst.root.insert(15);
-        bst.root.insert(3);
-        bst.root.insert(7);
-        bst.root.insert(5);
-        bst.root.insert(18);
-        bst.root.insert(17);
-        bst.root.insert(14);
+        for (int i : nodes) {
+            bst.insertNode(i);
+        }
+
+        bst.preorderTraversal();
+
+
     }
 
-
 }
-
-
