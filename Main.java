@@ -2,8 +2,11 @@
 class BST {
     public Node root;
 
-    BST(int val) {
-        root = new Node(val);
+    BST(int[] val) {
+        root = new Node(val[0]);
+        for (int i = 1; i < val.length; i++) {
+            this.insert(val[i]);
+        }
     }
 
     public void insertNode(int val) {
@@ -111,13 +114,10 @@ class Node {
 public class Main {
 
     public static void main(String args[]) {
-        BST bst = new BST(25);
+
         int[] nodes = new int[]{15, 10, 4, 12, 22, 18, 24, 50, 35, 31, 44, 70, 66, 90};
-
-        for (int i : nodes) {
-            bst.insertNode(i);
-        }
-
+        BST bst = new BST(nodes);
+ 
         bst.preorderTraversal();
         bst.inorderTraversal();
         bst.postorderTraversal();
