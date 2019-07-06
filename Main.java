@@ -18,8 +18,16 @@ class BST {
         }
     }
 
-    public void preorderTraversal(){
+    public void preorderTraversal() {
         root.preorderTraversal(root);
+    }
+
+    public void inorderTraversal() {
+        root.inorderTraversal(root);
+    }
+
+    public void postorderTraversal() {
+        root.postorderTraversal(root);
     }
 }
 
@@ -70,10 +78,33 @@ class Node {
     }
 
     public void preorderTraversal(Node node) {
-        if (node == null) return;
-        System.out.println(node.getVal() + " ");
-        preorderTraversal(node.left);
-        preorderTraversal(node.right);
+        if (node != null) {
+            System.out.println(node.getVal() + " ");
+            preorderTraversal(node.left);
+            preorderTraversal(node.right);
+        } else {
+            return;
+        }
+    }
+
+    public void inorderTraversal(Node node) {
+        if (node != null) {
+            inorderTraversal(node.left);
+            System.out.print(node.getVal() + " ");
+            inorderTraversal(node.right);
+        } else {
+            return;
+        }
+    }
+
+    public void postorderTraversal(Node node) {
+        if (node != null) {
+            postorderTraversal(node.left);
+            postorderTraversal(node.right);
+            System.out.print(node.getVal() + " ");
+        } else {
+            return;
+        }
     }
 }
 
@@ -88,6 +119,8 @@ public class Main {
         }
 
         bst.preorderTraversal();
+        bst.inorderTraversal();
+        bst.postorderTraversal();
 
 
     }
