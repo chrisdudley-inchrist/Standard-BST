@@ -1,36 +1,44 @@
 
 class BST {
-    public Node root;
+    private Node mRoot;
+
+    public Node getRoot() {
+        return mRoot;
+    }
+
+    public void setRoot(Node root) {
+        mRoot = root;
+    }
 
     BST(int[] val) {
-        root = new Node(val[0]);
+        mRoot = new Node(val[0]);
         for (int i = 1; i < val.length; i++) {
-            this.insert(val[i]);
+            this.insertNode(val[i]);
         }
     }
 
     public void insertNode(int val) {
-        root.insertNode(val);
+        getRoot().insertNode(val);
     }
 
     public boolean find(int val) {
-        if (root == null) {
+        if (getRoot() == null) {
             return false;
         } else {
-            return root.find(val);
+            return getRoot().find(val);
         }
     }
 
     public void preorderTraversal() {
-        root.preorderTraversal(root);
+        getRoot().preorderTraversal(getRoot());
     }
 
     public void inorderTraversal() {
-        root.inorderTraversal(root);
+        getRoot().inorderTraversal(getRoot());
     }
 
     public void postorderTraversal() {
-        root.postorderTraversal(root);
+        getRoot().postorderTraversal(getRoot());
     }
 }
 
@@ -41,6 +49,10 @@ class Node {
 
     public int getVal() {
         return mVal;
+    }
+
+    public void setVal(int val) {
+        mVal = val;
     }
 
     Node(int val) {
@@ -117,11 +129,6 @@ public class Main {
 
         int[] nodes = new int[]{15, 10, 4, 12, 22, 18, 24, 50, 35, 31, 44, 70, 66, 90};
         BST bst = new BST(nodes);
- 
-        bst.preorderTraversal();
-        bst.inorderTraversal();
-        bst.postorderTraversal();
-
 
     }
 
